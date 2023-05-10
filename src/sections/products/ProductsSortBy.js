@@ -1,19 +1,15 @@
 import * as React from 'react';
 import {Card, FormControl, FormControlLabel, Radio, RadioGroup} from "@mui/material";
-import {makeStyles} from "@mui/styles";
+import {styled} from "@mui/system";
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    padding: 20
-  },
+const StyledCard = styled(Card)(() => ({
+  padding: 20
 }));
 
 export default function ProductsSortBy() {
 
-  const classes = useStyles();
-
   return (
-    <Card className={classes.card}>
+    <StyledCard>
       <FormControl>
         <RadioGroup
           defaultValue="oldToNew"
@@ -25,6 +21,6 @@ export default function ProductsSortBy() {
           <FormControlLabel value="priceLowToHigh" control={<Radio/>} label="Price low to high"/>
         </RadioGroup>
       </FormControl>
-    </Card>
+    </StyledCard>
   );
 }
