@@ -13,11 +13,10 @@ export default function Router() {
   return useRoutes([
     // App
     {
-      path: 'app',
       element: <MainLayout/>,
       children: [
-        {element: <ProductsPage />, index: true},
-        {path: 'app', element: <ProductsPage/>},
+        {path: '/', element: <Navigate to="/products" replace />},
+        {path: 'products', element: <ProductsPage/>},
       ],
     },
     {path: '*', element: <Navigate to="/404" replace/>},
