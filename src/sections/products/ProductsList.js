@@ -6,10 +6,18 @@ import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Pagin
 import {useState} from "react";
 import {calculatePageCount, paginate} from "utils/pagination";
 import {PAGINATION} from "constants";
+import {set} from 'store/slices/productSlice';
+import {useDispatch} from 'react-redux';
 
 export default function ProductsList() {
 
-  const {data, isLoading, isSuccess} = services.useProducts({});
+  const dispatch = useDispatch();
+
+  const {data, isLoading, isSuccess} = services.useProducts({
+    onSuccess: () => {
+      dispatch(set(data));
+    }
+  });
 
   const [page, setPage] = useState(0);
 
