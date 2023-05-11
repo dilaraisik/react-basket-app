@@ -1,8 +1,9 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {SORT} from "constants";
 
 export const filterSlice = createSlice({
   name: 'filters',
-  initialState: { brands: [], models: [] },
+  initialState: { brands: [], models: [], sort: SORT.OLD_TO_NEW },
   reducers: {
     toggleBrandFilter: (state, action) => {
       if (state.brands.includes(action.payload)) {
@@ -20,13 +21,18 @@ export const filterSlice = createSlice({
         state.models = [...state.models, action.payload];
       }
     },
+    sortBy: (state, action) => {
+      state.sort = action.payload;
+    },
     clear: (state) => {
       state.brands = [];
+      state.models = [];
+      state.sort = '';
     },
   },
 })
 
-export const {toggleBrandFilter, toggleModelFilter, clear} = filterSlice.actions
+export const {toggleBrandFilter, toggleModelFilter, sortBy, clear} = filterSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -34,5 +40,6 @@ export const {toggleBrandFilter, toggleModelFilter, clear} = filterSlice.actions
 
 export const selectBrandFilters = (state) => state.filters.brands;
 export const selectModelFilters = (state) => state.filters.models;
+export const selectSortOptions = (state) => state.filters.sort;
 
 export default filterSlice.reducer

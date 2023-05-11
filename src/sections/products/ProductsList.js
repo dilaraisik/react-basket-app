@@ -6,12 +6,12 @@ import services from "services";
 import {Button, Card, CardActionArea, CardActions, CardContent, Pagination, Stack, Typography} from "@mui/material";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {calculatePageCount, paginate} from "utils/pagination";
-import {PAGINATION} from "constants";
+import {PAGINATION, SORT} from "constants";
 import {set} from 'store/slices/productSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {styled} from "@mui/system";
 import {alpha} from "@mui/material/styles";
-import {selectBrandFilters, selectModelFilters} from "../../store/slices/filterSlice";
+import {selectBrandFilters, selectModelFilters, selectSortOptions} from "../../store/slices/filterSlice";
 
 const StyledCard = styled(Card)(() => ({
   borderRadius: 8,
@@ -22,6 +22,7 @@ export default function ProductsList() {
   const dispatch = useDispatch();
   const brandFilters = useSelector(selectBrandFilters);
   const modelFilters = useSelector(selectModelFilters);
+  const sortKey = useSelector(selectSortOptions);
 
   const [page, setPage] = useState(1);
 
@@ -42,6 +43,62 @@ export default function ProductsList() {
       filtered = filtered.filter((d) => modelFilters.some((b) => d.model.includes(b)));
     }
 
+    if (sortKey.length > 0) {
+      switch(sortKey) {
+        case SORT.OLD_TO_NEW:
+          filtered = filtered.sort((a,b) => {
+            const first = new Date(a.createdAt).getTime();
+            const second = new Date(b.createdAt).getTime();
+            if (first < second) {
+              return 1;
+            }
+            if (first > second) {
+              return -1;
+            }
+            return 0;
+          });
+          break;
+        case SORT.NEW_TO_OLD:
+          filtered = filtered.sort((a,b) => {
+            const first = new Date(a.createdAt).getTime();
+            const second = new Date(b.createdAt).getTime();
+            if (first < second) {
+              return -1;
+            }
+            if (first > second) {
+              return 1;
+            }
+            return 0;
+          });
+          break;
+        case SORT.HIGH_TO_LOW:
+          filtered = filtered.sort((a,b) => {
+            const first = Number(a.price);
+            const second = Number(b.price);
+            if (first < second) {
+              return 1;
+            }
+            if (first > second) {
+              return -1;
+            }
+            return 0;
+          });
+          break;
+        case SORT.LOW_TO_HIGH:
+          filtered = filtered.sort((a,b) => {
+            const first = Number(a.price);
+            const second = Number(b.price);
+            if (first < second) {
+              return -1;
+            }
+            if (first > second) {
+              return 1;
+            }
+            return 0;
+          });
+          break;
+      }
+    }
     return filtered;
   }
 
