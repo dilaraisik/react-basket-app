@@ -57,12 +57,13 @@ export const basketSlice = createSlice({
   },
 })
 
-export const {add, clear} = basketSlice.actions
+export const {add, increase, decrease, clear} = basketSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.brands.value)`
 
 export const selectBasket = (state) => state.basket;
+export const calculateTotalPrice = (state) => state.basket.products.reduce((total, item) => total + (Number(item.price)*item.quantity), 0);
 
 export default basketSlice.reducer
