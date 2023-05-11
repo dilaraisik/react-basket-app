@@ -3,7 +3,8 @@ import {useCallback, useState} from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import services from "services";
-import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Pagination, Typography} from "@mui/material";
+import {Button, Card, CardActionArea, CardActions, CardContent, Pagination, Typography} from "@mui/material";
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {calculatePageCount, paginate} from "utils/pagination";
 import {PAGINATION} from "constants";
 import {set} from 'store/slices/productSlice';
@@ -40,10 +41,11 @@ export default function ProductsList() {
           <Grid item xs={3}>
             <Card>
               <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={product.image}
+                <LazyLoadImage
+                  placeholderSrc={product.image}
+                  effect="blur"
+                  style={{height: 140, objectFit: 'cover'}}
+                  src={product.image}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
