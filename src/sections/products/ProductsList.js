@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import services from "services";
@@ -99,8 +99,15 @@ export default function ProductsList() {
           break;
       }
     }
+
     return filtered;
   }
+
+  useEffect(() => {
+    if (sortKey.length > 0 || brandFilters.length > 0 || modelFilters.length > 0) {
+      setPage(1);
+    }
+  }, [sortKey, brandFilters, modelFilters]);
 
   const handleChange = useCallback((event, page) => {
     setPage(page);
@@ -146,7 +153,7 @@ export default function ProductsList() {
         ))}
         <Grid item xs={12}>
           <Stack justifyContent="center">
-            <Pagination count={calculatePageCount(PAGINATION.ROWS_PER_PAGE, data.length)}
+            <Pagination count={calculatePageCount(PAGINATION.ROWS_PER_PAGE, handleData().length)}
                         sx={{mt: 4, justifyContent: 'center', display: 'flex'}}
                         page={page}
                         variant="outlined"
