@@ -5,8 +5,9 @@ function paginate(array, pageSize, pageNumber) {
   );
 }
 
+
 function calculatePageCount(pageSize, totalCount) {
-  return (totalCount < pageSize) ? 1 : Math.floor(totalCount / pageSize);
+  return (totalCount < pageSize) ? 1 : Math.ceil(totalCount / pageSize);
 }
 
 export {
