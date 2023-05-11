@@ -43,15 +43,15 @@ export default function Basket() {
               m: 1,
             },
           }}>
-            <Tooltip title="Increase">
-              <IconButton color="primary" onClick={() => dispatch(increase(product))}>
-                <Iconify icon={'ic:round-plus'} width={24} height={24}/>
-              </IconButton>
-            </Tooltip>
-            <Typography>{product.quantity}</Typography>
             <Tooltip title="Decrease">
               <IconButton color="primary" onClick={() => dispatch(decrease(product))}>
                 <Iconify icon={'ic:round-minus'} width={24} height={24}/>
+              </IconButton>
+            </Tooltip>
+            <Typography>{product.quantity}</Typography>
+            <Tooltip title="Increase">
+              <IconButton color="primary" onClick={() => dispatch(increase(product))}>
+                <Iconify icon={'ic:round-plus'} width={24} height={24}/>
               </IconButton>
             </Tooltip>
           </Box>
