@@ -3,14 +3,15 @@ import {useCallback, useState} from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import services from "services";
-import {Button, Card, CardActionArea, CardActions, CardContent, Pagination, Typography, Stack} from "@mui/material";
+import {Button, Card, CardActionArea, CardActions, CardContent, Pagination, Stack, Typography} from "@mui/material";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {calculatePageCount, paginate} from "utils/pagination";
 import {PAGINATION} from "constants";
 import {set} from 'store/slices/productSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {styled} from "@mui/system";
 import {alpha} from "@mui/material/styles";
+import {selectBrandFilters, selectModelFilters} from "../../store/slices/filterSlice";
 
 const StyledCard = styled(Card)(() => ({
   borderRadius: 8,
@@ -19,6 +20,8 @@ const StyledCard = styled(Card)(() => ({
 
 export default function ProductsList() {
   const dispatch = useDispatch();
+  const brandFilters = useSelector(selectBrandFilters);
+  const modelFilters = useSelector(selectModelFilters);
 
   const [page, setPage] = useState(1);
 
@@ -27,6 +30,20 @@ export default function ProductsList() {
       dispatch(set(data));
     }
   });
+
+  const handleData = () => {
+    let filtered = data;
+
+    if (brandFilters.length > 0) {
+      filtered = filtered.filter((d) => brandFilters.some((b) => d.brand.includes(b)));
+    }
+
+    if (modelFilters.length > 0) {
+      filtered = filtered.filter((d) => modelFilters.some((b) => d.model.includes(b)));
+    }
+
+    return filtered;
+  }
 
   const handleChange = useCallback((event, page) => {
     setPage(page);
@@ -39,11 +56,11 @@ export default function ProductsList() {
   if (!isSuccess) {
     return <div>Something went wrong</div>
   }
-  
+
   return (
     <Box sx={{flexGrow: 1}}>
       <Grid container spacing={2}>
-        {paginate(data, PAGINATION.ROWS_PER_PAGE, page - 1).map((product) => (
+        {paginate(handleData(), PAGINATION.ROWS_PER_PAGE, page - 1).map((product) => (
           <Grid key={data.id} item xs={3}>
             <StyledCard>
               <CardActionArea>
@@ -77,7 +94,7 @@ export default function ProductsList() {
                         page={page}
                         variant="outlined"
                         color="primary"
-                        onChange={handleChange} />
+                        onChange={handleChange}/>
           </Stack>
         </Grid>
       </Grid>
