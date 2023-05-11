@@ -1,77 +1,57 @@
 import * as React from 'react';
-import {alpha, styled} from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
+import logo from 'assets/images/basket.png';
+import {AppBar, Box, InputAdornment, TextField, Toolbar, Typography} from "@mui/material";
+import Iconify from "components/iconify";
+import {bgBlur} from "utils/cssStyles";
 
-import SearchIcon from '@mui/icons-material/Search';
-import {AppBar, Box, InputBase, Toolbar, Typography} from "@mui/material";
-
-const Search = styled('div')(({theme}) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({theme}) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({theme}) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
+const Searchbox = styled(TextField)(({theme}) => ({
+  '& .MuiOutlinedInput-root': {
+    marginLeft: 20,
+    width: 500,
+    transition: theme.transitions.create(['box-shadow', 'width']),
+    '&.Mui-focused fieldset': {
+      boxShadow: 1,
     },
   },
+  '& fieldset': {
+    borderWidth: `1px !important`,
+    borderColor: `${theme.palette.grey[500_32]} !important`,
+  },
+  '&:hover fieldset': {
+    borderColor: `${'#f76b07'} !important`,
+  }
+}));
+
+const StyledAppBar = styled(AppBar)(() => ({
+  boxShadow: "none",
+  paddingLeft: 80,
+  paddingRight: 80,
+  position: 'fixed',
+  ...bgBlur({color: '#f9fafb'})
 }));
 
 export default function Header() {
   return (
     <Box sx={{flexGrow: 1}}>
-      <AppBar position="static">
+      <StyledAppBar>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{display: {xs: 'none', sm: 'block'}}}
-          >
-            Company Name
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon/>
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{'aria-label': 'search'}}
-            />
-          </Search>
+          <img src={logo} height={60}/>
+          <Searchbox size={"small"} placeholder={'Search'}
+                     InputProps={{
+                       startAdornment: (
+                         <InputAdornment position="start">
+                           <Iconify icon="carbon:search" width={20} height={20}/>
+                         </InputAdornment>
+                       ),
+                     }}/>
           <Box sx={{flexGrow: 1}}/>
           <Box sx={{display: {xs: 'none', md: 'flex'}}}>
-            <Typography>Name Surname</Typography>
+            <Iconify icon="mdi:user" width={20} height={20}/>
+            <Typography sx={{ml: 1}}>Dilara</Typography>
           </Box>
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
     </Box>
   );
 }
