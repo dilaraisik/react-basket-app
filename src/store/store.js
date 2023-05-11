@@ -1,9 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit';
-import { ProductSlice, FilterSlice } from 'store/slices';
+import {ProductSlice, FilterSlice, BasketSlice} from 'store/slices';
 
 export default configureStore({
   reducer: {
     products: ProductSlice,
-    filters: FilterSlice
+    filters: FilterSlice,
+    basket: BasketSlice,
   },
 });

@@ -12,6 +12,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {styled} from "@mui/system";
 import {alpha} from "@mui/material/styles";
 import {selectBrandFilters, selectModelFilters, selectSortOptions} from "../../store/slices/filterSlice";
+import {add} from "../../store/slices/basketSlice";
 
 const StyledCard = styled(Card)(() => ({
   borderRadius: 8,
@@ -144,7 +145,7 @@ export default function ProductsList() {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button fullWidth={true} size="small" color="primary" variant={"outlined"}>
+                <Button fullWidth={true} size="small" color="primary" variant={"outlined"} onClick={() => dispatch(add(product))}>
                   Add To Cart
                 </Button>
               </CardActions>
