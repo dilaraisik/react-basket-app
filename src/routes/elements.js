@@ -1,5 +1,4 @@
 import { Suspense, lazy } from 'react';
-// components
 import {LoadingScreen} from 'components';
 
 // ----------------------------------------------------------------------

@@ -8,7 +8,7 @@ export function products(axiosInstance) {
     .then((res) => res.data);
 }
 
-export default function useProducts(props){
+export default function useProducts(props) {
   const {api: axiosInstance} = useAxios();
 
   return useQuery(

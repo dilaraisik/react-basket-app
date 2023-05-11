@@ -1,9 +1,9 @@
 import * as React from 'react';
+import {useCallback, useState} from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import services from "services";
 import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Pagination, Typography} from "@mui/material";
-import {useState} from "react";
 import {calculatePageCount, paginate} from "utils/pagination";
 import {PAGINATION} from "constants";
 import {set} from 'store/slices/productSlice';
@@ -13,17 +13,17 @@ export default function ProductsList() {
 
   const dispatch = useDispatch();
 
+  const [page, setPage] = useState(0);
+
   const {data, isLoading, isSuccess} = services.useProducts({
     onSuccess: () => {
       dispatch(set(data));
     }
   });
 
-  const [page, setPage] = useState(0);
-
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
+  const handleChange = useCallback((event, page) => {
+    setPage(page);
+  }, []);
 
   if (isLoading) {
     return <p>Loading...</p>
@@ -62,7 +62,9 @@ export default function ProductsList() {
             </Card>
           </Grid>
         ))}
-        <Pagination count={calculatePageCount(PAGINATION.ROWS_PER_PAGE, data.length)} page={page} onChange={handleChange} />
+        <Pagination count={calculatePageCount(PAGINATION.ROWS_PER_PAGE, data.length)}
+                    page={page}
+                    onChange={handleChange} />
       </Grid>
     </Box>
   );

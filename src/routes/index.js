@@ -1,13 +1,6 @@
 import {Navigate, useRoutes} from 'react-router-dom';
-// layouts
 import MainLayout from '../layouts/main';
-//
-import {
-  // App
-  ProductsPage,
-} from './elements';
-
-// ----------------------------------------------------------------------
+import {ProductsPage,} from './elements';
 
 export default function Router() {
   return useRoutes([
@@ -15,7 +8,7 @@ export default function Router() {
     {
       element: <MainLayout/>,
       children: [
-        {path: '/', element: <Navigate to="/products" replace />},
+        {path: '/', element: <Navigate to="/products" replace/>},
         {path: 'products', element: <ProductsPage/>},
       ],
     },
