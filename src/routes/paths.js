@@ -6,7 +6,7 @@ export const PATH_PAGE = {
   page500: '/500'
 };
 
-export const PATH_DASHBOARD = {
+export const PATH_APP = {
   root: ROOTS_APP,
   products:  '/products',
   productDetail: (id) => `/products/${id}`,

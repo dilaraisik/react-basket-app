@@ -4,7 +4,7 @@ import logo from 'assets/images/basket.png';
 import {AppBar, Box, InputAdornment, TextField, Toolbar, Typography} from "@mui/material";
 import Iconify from "components/iconify";
 import {bgBlur} from "utils/cssStyles";
-import {PATH_DASHBOARD} from "../../routes/paths";
+import {PATH_APP} from "../../routes/paths";
 import {useNavigate} from "react-router-dom";
 
 const Searchbox = styled(TextField)(({theme}) => ({
@@ -40,7 +40,7 @@ export default function Header() {
     <Box sx={{flexGrow: 1}}>
       <StyledAppBar>
         <Toolbar>
-          <img style={{cursor: 'pointer'}} src={logo} height={60} alt='basket-logo' onClick={() => navigate(PATH_DASHBOARD.products)}/>
+          <img style={{cursor: 'pointer'}} src={logo} height={60} alt='basket-logo' onClick={() => navigate(PATH_APP.products)}/>
           <Searchbox size={"small"} placeholder={'Search'}
                      InputProps={{
                        startAdornment: (

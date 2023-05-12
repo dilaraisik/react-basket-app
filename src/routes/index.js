@@ -1,6 +1,6 @@
 import {Navigate, useRoutes} from 'react-router-dom';
-import MainLayout from '../layouts/main';
-import {ProductDetailPage, ProductsPage,} from './elements';
+import {Page404, ProductDetailPage, ProductsPage,} from './elements';
+import {ErrorLayout, MainLayout} from "layouts";
 
 export default function Router() {
   return useRoutes([
@@ -11,6 +11,13 @@ export default function Router() {
         {path: '/', element: <Navigate to="/products" replace/>},
         {path: 'products', element: <ProductsPage/>},
         {path: 'products/:id', element: <ProductDetailPage/>},
+      ],
+    },
+    //Error
+    {
+      element: <ErrorLayout/>,
+      children: [
+        {path: '404', element: <Page404/>},
       ],
     },
     {path: '*', element: <Navigate to="/404" replace/>},

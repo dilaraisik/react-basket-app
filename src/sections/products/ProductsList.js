@@ -21,7 +21,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from "react-router-dom";
 import {selectBrandFilters, selectModelFilters, selectSortOptions} from "../../store/slices/filterSlice";
 import {add} from "../../store/slices/basketSlice";
-import {PATH_DASHBOARD} from "../../routes/paths";
+import {PATH_APP} from "../../routes/paths";
 import {SkeletonProductsList, StyledCard} from "components";
 
 export default function ProductsList() {
@@ -135,7 +135,7 @@ export default function ProductsList() {
         {paginate(handleData(), PAGINATION.ROWS_PER_PAGE, page - 1).map((product) => (
           <Grid key={data.id} item xs={3}>
             <StyledCard>
-              <CardActionArea onClick={() => navigate(PATH_DASHBOARD.productDetail(product.id))}>
+              <CardActionArea onClick={() => navigate(PATH_APP.productDetail(product.id))}>
                 <LazyLoadImage
                   placeholderSrc={product.image}
                   effect="blur"
