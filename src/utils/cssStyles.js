@@ -10,3 +10,18 @@ export function bgBlur(props) {
     backgroundColor: alpha(color, opacity),
   };
 }
+
+export const displayHeader = {
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+};
+
+export const justifyBetweenHeader = {
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'justify-between',
+  flexWrap: 'nowrap'
+};
+

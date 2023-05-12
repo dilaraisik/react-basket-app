@@ -3,7 +3,7 @@ import {styled} from '@mui/material/styles';
 import logo from 'assets/images/basket.png';
 import {AppBar, Box, InputAdornment, Stack, TextField, Toolbar, Typography} from "@mui/material";
 import Iconify from "components/iconify";
-import {bgBlur} from "utils/cssStyles";
+import {bgBlur, displayHeader, justifyBetweenHeader} from "utils/cssStyles";
 import {PATH_APP} from "../../routes/paths";
 import {useNavigate} from "react-router-dom";
 
@@ -59,8 +59,8 @@ export default function Header() {
     <Box>
       <StyledAppBar>
         <Toolbar>
-          <Stack flexWrap='nowrap' direction='row' justifyContent='justify-between' alignItems='center' width='100%'>
-            <Box sx={{width: '100%', display:'flex' ,alignItems: 'center'}}>
+          <Stack direction='row' sx={{...justifyBetweenHeader}}>
+            <Box sx={{...displayHeader}}>
               <img style={{cursor: 'pointer'}} src={logo} height={60} alt='basket-logo'
                    onClick={() => navigate(PATH_APP.products)}/>
               <Searchbox size={"small"} placeholder={'Search'}

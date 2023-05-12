@@ -14,8 +14,6 @@ export default function ProductsFilterByBrand() {
   const [searchValue, setSearchValue] = useState('');
   const [searchData, setSearchData] = useState([]);
 
-  console.log('brands',brands);
-
   const searchItem = async (text) => {
     setSearchValue(text);
     const searchResult = brands.filter((b) => b.toLowerCase().indexOf(text.toLowerCase()) !== -1);
