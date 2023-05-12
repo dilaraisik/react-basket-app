@@ -1,12 +1,6 @@
 import * as React from "react";
-import {Card, Grid, Skeleton} from '@mui/material';
-import {styled} from "@mui/system";
-import {alpha} from "@mui/material/styles";
-
-const StyledCard = styled(Card)(() => ({
-  borderRadius: 8,
-  boxShadow: `0 0 2px 0 ${alpha('#9e9e9e', 0.2)}, 0 12px 24px -4px ${alpha('#9e9e9e', 0.12)}`
-}));
+import {Grid, Skeleton} from '@mui/material';
+import {StyledCard} from "../index";
 
 export default function SkeletonProductsList() {
   const skeleton = Array(20).fill('');

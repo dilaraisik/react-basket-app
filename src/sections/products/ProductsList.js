@@ -18,18 +18,11 @@ import {calculatePageCount, paginate} from "utils/pagination";
 import {PAGINATION, SORT} from "constants";
 import {set} from 'store/slices/productSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import {styled} from "@mui/system";
-import {alpha} from "@mui/material/styles";
 import {useNavigate} from "react-router-dom";
 import {selectBrandFilters, selectModelFilters, selectSortOptions} from "../../store/slices/filterSlice";
 import {add} from "../../store/slices/basketSlice";
 import {PATH_DASHBOARD} from "../../routes/paths";
-import {SkeletonProductsList} from "components";
-
-const StyledCard = styled(Card)(() => ({
-  borderRadius: 8,
-  boxShadow: `0 0 2px 0 ${alpha('#9e9e9e', 0.2)}, 0 12px 24px -4px ${alpha('#9e9e9e', 0.12)}`
-}));
+import {SkeletonProductsList, StyledCard} from "components";
 
 export default function ProductsList() {
   const dispatch = useDispatch();
