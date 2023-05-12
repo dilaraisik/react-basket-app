@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Card, Typography} from "@mui/material";
+import {Button, Card, Stack, Typography} from "@mui/material";
 import {styled} from "@mui/system";
 import {alpha} from "@mui/material/styles";
 import {useSelector} from "react-redux";
@@ -23,7 +23,15 @@ export default function TotalPrice() {
 
   return (
     <StyledCard>
-      <Typography> Total Price: {totalPrice}₺</Typography>
+      <Stack direction='row'
+             alignItems='center'
+             justifyContent="space-between" >
+        <Typography> Total </Typography>
+        <Typography variant='subtitle1' sx={{fontWeight: "bold"}} color='primary'>{totalPrice}₺</Typography>
+      </Stack>
+      <Button fullWidth={true} size="small" variant={"contained"} sx={{color: 'white', mt:2}}>
+        Checkout
+      </Button>
     </StyledCard>
   );
 }
