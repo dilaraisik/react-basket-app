@@ -14,6 +14,8 @@ export default function ProductsFilterByBrand() {
   const [searchValue, setSearchValue] = useState('');
   const [searchData, setSearchData] = useState([]);
 
+  console.log('brands',brands);
+
   const searchItem = async (text) => {
     setSearchValue(text);
     const searchResult = brands.filter((b) => b.toLowerCase().indexOf(text.toLowerCase()) !== -1);
@@ -28,7 +30,7 @@ export default function ProductsFilterByBrand() {
     dispatch(toggleBrandFilter(brand));
   };
 
-  return (<StyledCard sx={{p: 2}}>
+  return (<StyledCard title={'Filter By Brand'} sx={{p: 2}}>
     <TextField fullWidth size={"small"} id="outlined-basic" placeholder="Search" value={searchValue} variant="outlined"
                onChange={(e) => searchItem(e.target.value)}/>
     <Scrollbar style={{maxHeight: 250}} autoHide={true}>
@@ -36,7 +38,8 @@ export default function ProductsFilterByBrand() {
         {(searchValue.length > 0 ? searchData : brands).map((brand, index) => (
           <FormControlLabel
             key={index}
-            control={<Checkbox size="small" checked={isChecked(brand)} onChange={(e) => onBrandCheckboxChange(e, brand)}/>}
+            control={<Checkbox size="small" checked={isChecked(brand)}
+                               onChange={(e) => onBrandCheckboxChange(e, brand)}/>}
             label={brand}/>
         ))}
       </FormGroup>

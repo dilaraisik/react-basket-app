@@ -29,7 +29,7 @@ export default function ProductsFilterByModel() {
   };
 
   return (
-    <StyledCard sx={{p: 2}}>
+    <StyledCard title={'Filter By Model'} sx={{p: 2, mb: 2}}>
       <TextField fullWidth size={"small"} id="outlined-basic" placeholder="Search" value={searchValue}
                  variant="outlined"
                  onChange={(e) => searchItem(e.target.value)}/>
