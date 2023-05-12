@@ -11,15 +11,15 @@ export default function Products() {
       </Helmet>
 
       <Grid container spacing={2}>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={12} lg={3}>
           <ProductsSortBy/>
           <ProductsFilterByBrand/>
           <ProductsFilterByModel/>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={12} lg={6}>
           <ProductsList/>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={12} lg={3}>
           <Basket/>
           <TotalPrice />
         </Grid>

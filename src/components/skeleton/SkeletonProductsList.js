@@ -9,7 +9,7 @@ export default function SkeletonProductsList() {
     <>
       <Grid container spacing={2}>
         {skeleton.map((row, index) => (
-        <Grid key={index} item xs={3}>
+        <Grid key={index} item xs={12} md={6} lg={3}>
           <StyledCard>
             <Skeleton width="100%" height={250} variant="rectangular" sx={{borderRadius: 2}}/>
           </StyledCard>

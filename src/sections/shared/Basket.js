@@ -14,7 +14,6 @@ export default function Basket() {
 
   const lastItemIndex = basket.products.length - 1;
 
-
   return (
     <StyledCard sx={{p: 2}}>
       {basket.products.map((product, index) => (
@@ -52,7 +51,6 @@ export default function Basket() {
           </Stack>
           {(index !== (lastItemIndex)) && (
             <Divider sx={{mt: 2, mb: 2}} variant="dashed"/>
-
           )}
         </>
       ))}

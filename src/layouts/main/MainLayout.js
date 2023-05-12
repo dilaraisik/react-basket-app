@@ -16,8 +16,8 @@ export default function MainLayout() {
         sx={{
           flexGrow: 1,
           ...(!isHome && {
-            px: 20,
-            py: 10
+            px: { xs: 2, md: 20 },
+            py: { xs: 8, md: 10 },
           }),
         }}
       >
