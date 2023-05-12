@@ -24,6 +24,7 @@ import {useNavigate} from "react-router-dom";
 import {selectBrandFilters, selectModelFilters, selectSortOptions} from "../../store/slices/filterSlice";
 import {add} from "../../store/slices/basketSlice";
 import {PATH_DASHBOARD} from "../../routes/paths";
+import {SkeletonProductsList} from "components";
 
 const StyledCard = styled(Card)(() => ({
   borderRadius: 8,
@@ -128,7 +129,7 @@ export default function ProductsList() {
   }, []);
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return ( <SkeletonProductsList />)
   }
 
   if (!isSuccess) {
