@@ -38,7 +38,7 @@ export default function ProductsFilterByBrand() {
   };
 
   return (<StyledCard>
-    <TextField fullWidth size={"small"} id="outlined-basic" label="Search" value={searchValue} variant="outlined"
+    <TextField fullWidth size={"small"} id="outlined-basic" placeholder="Search" value={searchValue} variant="outlined"
                onChange={(e) => searchItem(e.target.value)}/>
     <Scrollbar style={{maxHeight: 250}} autoHide={true}>
       <FormGroup>

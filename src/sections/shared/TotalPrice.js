@@ -23,7 +23,7 @@ export default function TotalPrice() {
 
   return (
     <StyledCard>
-      <Typography>Total Price: {totalPrice}₺</Typography>
+      <Typography> Total Price: {totalPrice}₺</Typography>
     </StyledCard>
   );
 }

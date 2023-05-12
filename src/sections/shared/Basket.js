@@ -33,7 +33,7 @@ export default function Basket() {
             alignItems: 'start'
           }}>
             <Typography>{product.name}</Typography>
-            <Typography>{(product.price) * (product.quantity)}</Typography>
+            <Typography color='primary'>{(product.price) * (product.quantity)}₺</Typography>
           </Box>
           <Box sx={{
             display: 'flex',
