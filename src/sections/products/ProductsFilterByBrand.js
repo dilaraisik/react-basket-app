@@ -28,7 +28,7 @@ export default function ProductsFilterByBrand() {
     dispatch(toggleBrandFilter(brand));
   };
 
-  return (<StyledCard title={'Filter By Brand'} sx={{p: 2}}>
+  return (<StyledCard title={'Filter By Brand'} sx={{p: 2, mb: 2}}>
     <TextField fullWidth size={"small"} id="outlined-basic" placeholder="Search" value={searchValue} variant="outlined"
                onChange={(e) => searchItem(e.target.value)}/>
     <Scrollbar style={{maxHeight: 250}} autoHide={true}>

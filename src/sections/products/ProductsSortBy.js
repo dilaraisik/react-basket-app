@@ -21,7 +21,7 @@ export default function ProductsSortBy() {
   };
 
   return (
-    <StyledCard title={'Sort By'} sx={{p: 2}}>
+    <StyledCard title={'Sort By'} sx={{p: 2, mb: 2}}>
       <FormControl>
         <RadioGroup
           defaultValue={SORT.OLD_TO_NEW}
