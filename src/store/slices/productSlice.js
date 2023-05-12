@@ -28,5 +28,6 @@ export const {set, add, remove, clear} = productSlice.actions
 
 export const selectBrands = (state) => (state.products.products || [])?.map((p) => (p.brand)).filter((x, i, a) => a.indexOf(x) == i);
 export const selectModels = (state) => (state.products.products || [])?.map((p) => (p.model)).filter((x, i, a) => a.indexOf(x) == i);
+export const selectProducts = (state) => state.products.products;
 
 export default productSlice.reducer

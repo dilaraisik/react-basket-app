@@ -14,4 +14,6 @@ const Loadable = (Component) => (props) =>
 
 // APP
 export const ProductsPage = Loadable(lazy(() => import('../pages/app/Products')));
+export const ProductDetailPage = Loadable(lazy(() => import('../pages/app/ProductDetail')));
+
 

@@ -1,9 +1,18 @@
 import * as React from 'react';
 import {useCallback, useEffect, useState} from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import services from "services";
-import {Button, Card, CardActionArea, CardActions, CardContent, Pagination, Stack, Typography} from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Grid,
+  Pagination,
+  Stack,
+  Typography
+} from "@mui/material";
 import {LazyLoadImage} from 'react-lazy-load-image-component';
 import {calculatePageCount, paginate} from "utils/pagination";
 import {PAGINATION, SORT} from "constants";
@@ -11,8 +20,10 @@ import {set} from 'store/slices/productSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {styled} from "@mui/system";
 import {alpha} from "@mui/material/styles";
+import {useNavigate} from "react-router-dom";
 import {selectBrandFilters, selectModelFilters, selectSortOptions} from "../../store/slices/filterSlice";
 import {add} from "../../store/slices/basketSlice";
+import {PATH_DASHBOARD} from "../../routes/paths";
 
 const StyledCard = styled(Card)(() => ({
   borderRadius: 8,
@@ -24,6 +35,8 @@ export default function ProductsList() {
   const brandFilters = useSelector(selectBrandFilters);
   const modelFilters = useSelector(selectModelFilters);
   const sortKey = useSelector(selectSortOptions);
+
+  const navigate = useNavigate();
 
   const [page, setPage] = useState(1);
 
@@ -45,9 +58,9 @@ export default function ProductsList() {
     }
 
     if (sortKey.length > 0) {
-      switch(sortKey) {
+      switch (sortKey) {
         case SORT.OLD_TO_NEW:
-          filtered = filtered.sort((a,b) => {
+          filtered = filtered.sort((a, b) => {
             const first = new Date(a.createdAt).getTime();
             const second = new Date(b.createdAt).getTime();
             if (first < second) {
@@ -60,7 +73,7 @@ export default function ProductsList() {
           });
           break;
         case SORT.NEW_TO_OLD:
-          filtered = filtered.sort((a,b) => {
+          filtered = filtered.sort((a, b) => {
             const first = new Date(a.createdAt).getTime();
             const second = new Date(b.createdAt).getTime();
             if (first < second) {
@@ -73,7 +86,7 @@ export default function ProductsList() {
           });
           break;
         case SORT.HIGH_TO_LOW:
-          filtered = filtered.sort((a,b) => {
+          filtered = filtered.sort((a, b) => {
             const first = Number(a.price);
             const second = Number(b.price);
             if (first < second) {
@@ -86,7 +99,7 @@ export default function ProductsList() {
           });
           break;
         case SORT.LOW_TO_HIGH:
-          filtered = filtered.sort((a,b) => {
+          filtered = filtered.sort((a, b) => {
             const first = Number(a.price);
             const second = Number(b.price);
             if (first < second) {
@@ -127,7 +140,7 @@ export default function ProductsList() {
       <Grid container spacing={2}>
         {paginate(handleData(), PAGINATION.ROWS_PER_PAGE, page - 1).map((product) => (
           <Grid key={data.id} item xs={3}>
-            <StyledCard>
+            <StyledCard onClick={() => navigate(PATH_DASHBOARD.productDetail(product.id))}>
               <CardActionArea>
                 <LazyLoadImage
                   placeholderSrc={product.image}
@@ -145,7 +158,8 @@ export default function ProductsList() {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button fullWidth={true} size="small" color="primary" variant={"outlined"} onClick={() => dispatch(add(product))}>
+                <Button fullWidth={true} size="small" color="primary" variant={"outlined"}
+                        onClick={() => dispatch(add(product))}>
                   Add To Cart
                 </Button>
               </CardActions>
