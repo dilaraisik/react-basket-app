@@ -140,8 +140,8 @@ export default function ProductsList() {
       <Grid container spacing={2}>
         {paginate(handleData(), PAGINATION.ROWS_PER_PAGE, page - 1).map((product) => (
           <Grid key={data.id} item xs={3}>
-            <StyledCard onClick={() => navigate(PATH_DASHBOARD.productDetail(product.id))}>
-              <CardActionArea>
+            <StyledCard>
+              <CardActionArea onClick={() => navigate(PATH_DASHBOARD.productDetail(product.id))}>
                 <LazyLoadImage
                   placeholderSrc={product.image}
                   effect="blur"
