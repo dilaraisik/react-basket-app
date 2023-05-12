@@ -1,10 +1,7 @@
 import {HelmetProvider} from 'react-helmet-async';
 import {BrowserRouter} from 'react-router-dom';
 import {Provider as ReduxProvider} from 'react-redux';
-
-// routes
 import Router from './routes';
-
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import store from './store/store';
@@ -22,6 +19,11 @@ const theme = createTheme({
     background: {
       default: "#ff5050"
     }
+  },
+  typography: {
+    fontFamily: [
+      'Poppins',
+    ].join(','),
   }
 });
 
