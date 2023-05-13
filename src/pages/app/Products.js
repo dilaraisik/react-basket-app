@@ -1,5 +1,11 @@
 import {Box, Grid} from "@mui/material";
-import {ProductsFilterByBrand, ProductsFilterByModel, ProductsList, ProductsSortBy} from 'sections/products'
+import {
+  ClearFilterButton,
+  ProductsFilterByBrand,
+  ProductsFilterByModel,
+  ProductsList,
+  ProductsSortBy
+} from 'sections/products'
 import {Basket, TotalPrice} from "sections/shared";
 import {Helmet} from "react-helmet-async";
 
@@ -12,6 +18,7 @@ export default function Products() {
 
       <Grid container spacing={2}>
         <Grid item xs={12} md={12} lg={3}>
+          <ClearFilterButton />
           <ProductsSortBy/>
           <ProductsFilterByBrand/>
           <ProductsFilterByModel/>

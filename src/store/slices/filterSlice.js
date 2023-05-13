@@ -41,5 +41,6 @@ export const {toggleBrandFilter, toggleModelFilter, sortBy, clear} = filterSlice
 export const selectBrandFilters = (state) => state.filters.brands;
 export const selectModelFilters = (state) => state.filters.models;
 export const selectSortOptions = (state) => state.filters.sort;
+export const hasAppliedFilters = (state) => state.filters.brands.length > 0 || state.filters.models.length > 0 || state.filters.sort.length > 0;
 
 export default filterSlice.reducer
