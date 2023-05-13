@@ -10,8 +10,6 @@ import ThemeProvider from "./theme";
 
 const queryClient = new QueryClient();
 
-
-
 function App() {
   return (
     <HelmetProvider>
