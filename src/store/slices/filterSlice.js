@@ -3,7 +3,7 @@ import {SORT} from "constants";
 
 export const filterSlice = createSlice({
   name: 'filters',
-  initialState: { brands: [], models: [], sort: SORT.OLD_TO_NEW },
+  initialState: { brands: [], models: [], sort: SORT.OLD_TO_NEW, name: '' },
   reducers: {
     toggleBrandFilter: (state, action) => {
       if (state.brands.includes(action.payload)) {
@@ -24,6 +24,9 @@ export const filterSlice = createSlice({
     sortBy: (state, action) => {
       state.sort = action.payload;
     },
+    nameFilter: (state, action) => {
+      state.name = action.payload;
+    },
     clear: (state) => {
       state.brands = [];
       state.models = [];
@@ -32,7 +35,7 @@ export const filterSlice = createSlice({
   },
 })
 
-export const {toggleBrandFilter, toggleModelFilter, sortBy, clear} = filterSlice.actions
+export const {toggleBrandFilter, toggleModelFilter, sortBy, nameFilter, clear} = filterSlice.actions
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -41,6 +44,7 @@ export const {toggleBrandFilter, toggleModelFilter, sortBy, clear} = filterSlice
 export const selectBrandFilters = (state) => state.filters.brands;
 export const selectModelFilters = (state) => state.filters.models;
 export const selectSortOptions = (state) => state.filters.sort;
+export const selectNameFilter = (state) => state.filters.name;
 export const hasAppliedFilters = (state) => state.filters.brands.length > 0 || state.filters.models.length > 0 || state.filters.sort.length > 0;
 
 export default filterSlice.reducer

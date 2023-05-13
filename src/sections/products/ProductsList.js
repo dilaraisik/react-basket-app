@@ -4,7 +4,6 @@ import services from "services";
 import {
   Box,
   Button,
-  Card,
   CardActionArea,
   CardActions,
   CardContent,
@@ -19,7 +18,12 @@ import {PAGINATION, SORT} from "constants";
 import {set} from 'store/slices/productSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from "react-router-dom";
-import {selectBrandFilters, selectModelFilters, selectSortOptions} from "../../store/slices/filterSlice";
+import {
+  selectBrandFilters,
+  selectModelFilters,
+  selectNameFilter,
+  selectSortOptions
+} from "../../store/slices/filterSlice";
 import {add} from "../../store/slices/basketSlice";
 import {PATH_APP} from "../../routes/paths";
 import {SkeletonProductsList, StyledCard} from "components";
@@ -28,6 +32,7 @@ export default function ProductsList() {
   const dispatch = useDispatch();
   const brandFilters = useSelector(selectBrandFilters);
   const modelFilters = useSelector(selectModelFilters);
+  const searchFilter = useSelector(selectNameFilter);
   const sortKey = useSelector(selectSortOptions);
 
   const navigate = useNavigate();
@@ -41,7 +46,7 @@ export default function ProductsList() {
   });
 
   const handleData = () => {
-    if(!data){
+    if (!data) {
       return;
     }
 
@@ -53,6 +58,10 @@ export default function ProductsList() {
 
     if (modelFilters.length > 0) {
       filtered = filtered.filter((d) => modelFilters.some((b) => d.model.includes(b)));
+    }
+
+    if (searchFilter.length > 0) {
+      filtered = filtered.filter((d) => d.name.toLowerCase().indexOf(searchFilter.toLowerCase()) !== -1);
     }
 
     if (sortKey.length > 0) {
@@ -126,7 +135,7 @@ export default function ProductsList() {
   }, []);
 
   if (isLoading) {
-    return ( <SkeletonProductsList />)
+    return (<SkeletonProductsList/>)
   }
 
   if (!isSuccess) {
@@ -139,7 +148,8 @@ export default function ProductsList() {
         {paginate(handleData(), PAGINATION.ROWS_PER_PAGE, page - 1).map((product) => (
           <Grid key={data.id} item xs={12} md={6} lg={3}>
             <StyledCard>
-              <CardActionArea sx={{width: '100%', height: '100%'}} onClick={() => navigate(PATH_APP.productDetail(product.id))}>
+              <CardActionArea sx={{width: '100%', height: '100%'}}
+                              onClick={() => navigate(PATH_APP.productDetail(product.id))}>
                 <LazyLoadImage
                   placeholderSrc={product.image}
                   effect="blur"
@@ -168,7 +178,7 @@ export default function ProductsList() {
         <Grid item xs={12}>
           <Stack justifyContent="center">
             <Pagination count={calculatePageCount(PAGINATION.ROWS_PER_PAGE, handleData().length)}
-                        sx={{mt: {xs:1, md:3}, justifyContent: 'center', display: 'flex'}}
+                        sx={{mt: {xs: 1, md: 3}, justifyContent: 'center', display: 'flex'}}
                         page={page}
                         variant="outlined"
                         color="primary"

@@ -6,6 +6,8 @@ import Iconify from "components/iconify";
 import {bgBlur, displayHeader, justifyBetweenHeader} from "utils/cssStyles";
 import {PATH_APP} from "../../routes/paths";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {nameFilter, selectNameFilter} from "../../store/slices/filterSlice";
 
 const Searchbox = styled(TextField)(({theme}) => ({
   '& .MuiOutlinedInput-root': {
@@ -54,6 +56,8 @@ const StyledAppBar = styled(AppBar)(({theme}) => ({
 
 export default function Header() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const name = useSelector(selectNameFilter);
 
   return (
     <Box>
@@ -64,13 +68,16 @@ export default function Header() {
               <img style={{cursor: 'pointer'}} src={logo} height={60} alt='basket-logo'
                    onClick={() => navigate(PATH_APP.products)}/>
               <Searchbox size={"small"} placeholder={'Search'}
+                         value={name}
+                         onChange={(e) => dispatch(nameFilter(e.target.value))}
                          InputProps={{
                            startAdornment: (
                              <InputAdornment position="start">
                                <Iconify icon="carbon:search" width={20} height={20}/>
                              </InputAdornment>
                            ),
-                         }}/>
+                         }}
+              />
             </Box>
             <Box sx={{display: 'flex'}}>
               <Iconify icon="mdi:user" width={20} height={20}/>
