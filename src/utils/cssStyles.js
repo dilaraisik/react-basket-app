@@ -25,3 +25,11 @@ export const justifyBetweenHeader = {
   flexWrap: 'nowrap'
 };
 
+export const hiddenSmallScreen = {
+  display: {xs: 'none', md: 'flex'}
+};
+
+export const alignItemsCenter = {
+  display: 'flex',
+  alignItems: 'center'
+};

@@ -3,17 +3,18 @@ import {styled} from '@mui/material/styles';
 import logo from 'assets/images/basket.png';
 import {AppBar, Box, InputAdornment, Stack, TextField, Toolbar, Typography} from "@mui/material";
 import Iconify from "components/iconify";
-import {bgBlur, displayHeader, justifyBetweenHeader} from "utils/cssStyles";
+import {alignItemsCenter, bgBlur, displayHeader, hiddenSmallScreen, justifyBetweenHeader} from "utils/cssStyles";
 import {PATH_APP} from "../../routes/paths";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {nameFilter, selectNameFilter} from "../../store/slices/filterSlice";
+import {calculateTotalPrice} from "../../store/slices/basketSlice";
 
 const Searchbox = styled(TextField)(({theme}) => ({
   '& .MuiOutlinedInput-root': {
     marginLeft: 20,
     [theme.breakpoints.up("xs")]: {
-      width: 160
+      width: 180
     },
     [theme.breakpoints.up("sm")]: {
       width: 400
@@ -58,6 +59,7 @@ export default function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const name = useSelector(selectNameFilter);
+  const totalPrice = useSelector(calculateTotalPrice);
 
   return (
     <Box>
@@ -79,7 +81,11 @@ export default function Header() {
                          }}
               />
             </Box>
-            <Box sx={{display: 'flex'}}>
+
+            <Box sx={{...alignItemsCenter}}>
+              <Iconify sx={{mr: 1, ...hiddenSmallScreen}} icon="material-symbols:shopping-basket-outline" width={20}
+                       height={20}/>
+              <Typography sx={{mr: 3, ...hiddenSmallScreen}}>{totalPrice}₺</Typography>
               <Iconify icon="mdi:user" width={20} height={20}/>
               <Typography sx={{ml: 1, display: {xs: 'none', md: 'flex'}}}>Dilara</Typography>
             </Box>
