@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import {HelmetProvider} from 'react-helmet-async';
+import {BrowserRouter} from 'react-router-dom';
+import {Provider as ReduxProvider} from 'react-redux';
+import Router from './routes';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
+import { persistor, store } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import ThemeProvider from "./theme";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HelmetProvider>
+      <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider>
+              <BrowserRouter>
+                <Router/>
+              </BrowserRouter>
+            </ThemeProvider>
+            <ReactQueryDevtools initialIsOpen={false}/>
+          </QueryClientProvider>
+        </PersistGate>
+      </ReduxProvider>
+    </HelmetProvider>
   );
 }
 
