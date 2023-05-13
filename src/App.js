@@ -4,9 +4,10 @@ import {Provider as ReduxProvider} from 'react-redux';
 import Router from './routes';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
-import store from './store/store';
+import { persistor, store } from './store/store';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {GlobalStyles} from "@mui/system";
+import { PersistGate } from 'redux-persist/integration/react';
 
 const queryClient = new QueryClient();
 
@@ -31,23 +32,23 @@ function App() {
   return (
     <HelmetProvider>
       <ReduxProvider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyles
-              styles={{
-                body: { backgroundColor: "#f9fafb" }
-              }}
-            />
-            <BrowserRouter>
-              <Router/>
-            </BrowserRouter>
-          </ThemeProvider>
-          <ReactQueryDevtools initialIsOpen={false}/>
-        </QueryClientProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider theme={theme}>
+              <GlobalStyles
+                styles={{
+                  body: { backgroundColor: "#f9fafb" }
+                }}
+              />
+              <BrowserRouter>
+                <Router/>
+              </BrowserRouter>
+            </ThemeProvider>
+            <ReactQueryDevtools initialIsOpen={false}/>
+          </QueryClientProvider>
+        </PersistGate>
       </ReduxProvider>
     </HelmetProvider>
-
-
   );
 }
 
